@@ -4,9 +4,12 @@ const app = express();
 const routes = require('./routes');
 const { AppDataSource } = require('./data-source');
 const bodyParser = require('body-parser');
-
-app.use(bodyParser.json())
+const cors = require('cors');
+app.use(cors({ origin: 'http://localhost:5173' }));
+app.use(bodyParser.json());
 app.use('/v1', routes);
+
+
 
 AppDataSource.initialize()
   .then(() => {
