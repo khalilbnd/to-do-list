@@ -23,6 +23,15 @@ export const deleteTodo = createAsyncThunk('todo/deleteTodo', async (id) => {
   return id;
 });
 
+export const deleteAll = createAsyncThunk('todo/deleteAll', async (ids) => {
+  console.log(ids);
+  
+  await axios.delete(API_URL, { data: { ids: ids } });
+  return ids;
+});
+
+
+
 const initialValue = {
   filterStatus: 'all',
   todoList: [],
@@ -65,7 +74,11 @@ export const todoSlice = createSlice({
       })
       .addCase(deleteTodo.fulfilled, (state, action) => {
         state.todoList = state.todoList.filter(todo => todo.id !== action.payload);
+      })
+      .addCase(deleteAll.fulfilled, (state, action) => {
+        state.todoList = state.todoList.filter(todo => !action.payload.includes(todo.id));
       });
+
   },
 });
 

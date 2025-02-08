@@ -58,14 +58,16 @@ function TodoModal({ type, modalOpen, setModalOpen, todo }) {
       if (type === 'add') {
         dispatch(
           addTodo({
-            
+              title,
+              description,
+              isCompleted: status === 'complete',
           })
         );
         toast.success('Task added successfully');
       }
       if (type === 'update') {
         if (todo.title !== title || todo.status !== status) {
-          dispatch(updateTodo({ ...todo, title, status }));
+          dispatch(updateTodo({ ...todo, title, description, isCompleted: status === 'complete' }));
           toast.success('Task Updated successfully');
         } else {
           toast.error('No changes made');
@@ -128,7 +130,9 @@ function TodoModal({ type, modalOpen, setModalOpen, todo }) {
                   onChange={(e) => setDescription(e.target.value)}
                 />
               </label>
-              <label htmlFor="type">
+              {
+                type == 'update' && (
+                  <label htmlFor="type">
                 Status
                 <select
                   id="type"
@@ -138,7 +142,8 @@ function TodoModal({ type, modalOpen, setModalOpen, todo }) {
                   <option value="incomplete">Incomplete</option>
                   <option value="complete">Completed</option>
                 </select>
-              </label>
+              </label>)
+              }
               <div className={styles.buttonContainer}>
                 <Button type="submit" variant="primary">
                   {type === 'add' ? 'Add Task' : 'Update Task'}
