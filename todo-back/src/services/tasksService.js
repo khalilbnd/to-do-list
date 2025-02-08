@@ -6,9 +6,14 @@ class TaskService {
         return await TaskRepository.findAll();
     }
 
+    static async getTaskById(taskId) {
+        return await TaskRepository.findById(taskId);
+    }
+
     static async createTask(taskData) {
         return await TaskRepository.create(taskData);
     }
+
 
 
 }

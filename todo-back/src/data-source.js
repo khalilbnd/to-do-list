@@ -13,6 +13,6 @@ module.exports.AppDataSource = new DataSource({
     synchronize: true, 
     logging: false,
     entities: [Task],
-    migrations: [], 
+    migrations: ["src/migrations/*.ts"], 
     subscribers: [], 
 });

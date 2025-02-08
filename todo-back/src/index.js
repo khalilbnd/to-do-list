@@ -5,9 +5,7 @@ const routes = require('./routes');
 const { AppDataSource } = require('./data-source');
 const bodyParser = require('body-parser');
 
-app.use(bodyParser.json(
-    
-))
+app.use(bodyParser.json())
 app.use('/v1', routes);
 
 AppDataSource.initialize()
