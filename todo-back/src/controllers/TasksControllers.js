@@ -35,6 +35,20 @@ class TaskController {
         }
     }
 
+    static async updateTask(req, res) {
+        try {
+            const taskId = req.params.id;
+            const { title, description, isCompleted } = req.body;
+            const updatedTask = await TaskService.updateTask(taskId, { title, description, isCompleted });
+            if (!updatedTask) {
+                return res.status(404).json({ message: 'Task not found' });
+            }
+            res.status(200).json(updatedTask);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
+
 
 }
 

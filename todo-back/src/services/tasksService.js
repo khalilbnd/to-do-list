@@ -14,6 +14,10 @@ class TaskService {
         return await TaskRepository.create(taskData);
     }
 
+    static async updateTask(taskId, taskData) {
+        return await TaskRepository.update(taskId, taskData);
+    }
+
 
 
 }

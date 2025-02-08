@@ -20,10 +20,6 @@ const Task = new EntitySchema({
             type: 'boolean',
             default: false,
         },
-        isDeleted: {
-            type: 'boolean',
-            default: false,
-        },
         createdAt: {
             type: 'timestamp',
             createDate: true,
