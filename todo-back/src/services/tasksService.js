@@ -22,6 +22,10 @@ class TaskService {
         return await TaskRepository.delete(taskId);
     }
 
+    static async deleteMultipleTasks(taskIds) {
+        return await TaskRepository.deleteMultiple(taskIds);
+    }
+
 
 
 }

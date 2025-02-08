@@ -62,6 +62,16 @@ class TaskController {
         }
     }
 
+    static async deleteMultipleTasks(req, res) {
+        try {
+            const { ids } = req.body;
+            const deletedTasks = await TaskService.deleteMultipleTasks(ids);
+            res.status(204).json(deletedTasks);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
+
 
 }
 

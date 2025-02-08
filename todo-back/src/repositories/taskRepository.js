@@ -1,5 +1,6 @@
 const { Task } = require('../entities/Tasks');
-const { AppDataSource } = require('../data-source')
+const { AppDataSource } = require('../data-source');
+const { In } = require('typeorm');
 class TaskRepository {
     // Récupérer toutes les tâches
     static async findAll() {
@@ -30,6 +31,13 @@ class TaskRepository {
         const task = await taskRepository.findOneBy({ id: taskId });
         if (!task) return null;
         return await taskRepository.remove(task);
+    }
+
+    static async deleteMultiple(taskIds) {
+        const taskRepository = AppDataSource.getRepository(Task);
+        const tasks = await taskRepository.findBy({ id: In(taskIds) });
+        if (!tasks.length) return null;
+        return await taskRepository.remove(tasks);
     }
 
 }
