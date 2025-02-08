@@ -18,6 +18,10 @@ class TaskService {
         return await TaskRepository.update(taskId, taskData);
     }
 
+    static async deleteTask(taskId) {
+        return await TaskRepository.delete(taskId);
+    }
+
 
 
 }

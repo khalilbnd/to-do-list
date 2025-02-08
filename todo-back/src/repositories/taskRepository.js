@@ -25,6 +25,13 @@ class TaskRepository {
         return await taskRepository.save(task);
     }
 
+    static async delete(taskId) {
+        const taskRepository = AppDataSource.getRepository(Task);
+        const task = await taskRepository.findOneBy({ id: taskId });
+        if (!task) return null;
+        return await taskRepository.remove(task);
+    }
+
 }
 
 module.exports = { TaskRepository }
