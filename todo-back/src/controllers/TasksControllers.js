@@ -72,6 +72,15 @@ class TaskController {
         }
     }
 
+    static async getTasksStatistics(req, res) {
+        try {
+            const statistics = await TaskService.getTasksStatistics();
+            res.status(200).json(statistics);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
+
 
 }
 

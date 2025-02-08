@@ -26,6 +26,10 @@ class TaskService {
         return await TaskRepository.deleteMultiple(taskIds);
     }
 
+    static async getTasksStatistics() {
+        return await TaskRepository.getStatistics();
+    }
+
 
 
 }

@@ -9,6 +9,8 @@ module.exports = class TasksTable1739023624293 {
                 title VARCHAR(255) NOT NULL,
                 description TEXT,
                 isCompleted BOOLEAN DEFAULT false,
+                isDeleted BOOLEAN DEFAULT false,
+                isUpdated BOOLEAN DEFAULT false,
                 createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
               );
             `);
