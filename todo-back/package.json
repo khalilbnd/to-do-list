@@ -6,7 +6,8 @@
     "postinstall": "npm i -g nodemon",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/index.js",
-    "migrate": "npx typeorm migration:generate -d src/data-source.ts -n Migration"
+    "migrate": "npx typeorm migration:generate -d src/data-source.ts -n Migration",
+    "docker:run": "docker-compose -f docker-compose.yml up -d --build"
   },
   "author": "",
   "license": "ISC",
