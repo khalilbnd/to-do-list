@@ -23,11 +23,14 @@ export const deleteTodo = createAsyncThunk('todo/deleteTodo', async (id) => {
   return id;
 });
 
-export const deleteAll = createAsyncThunk('todo/deleteAll', async (ids) => {
-  console.log(ids);
-  
+export const deleteAll = createAsyncThunk('todo/deleteAll', async (ids) => {  
   await axios.delete(API_URL, { data: { ids: ids } });
   return ids;
+});
+
+export const getStatistics = createAsyncThunk('todo/getStatistics', async () => {
+  const response = await axios.get(`${API_URL}/statistics`);
+  return response.data;
 });
 
 
@@ -35,6 +38,11 @@ export const deleteAll = createAsyncThunk('todo/deleteAll', async (ids) => {
 const initialValue = {
   filterStatus: 'all',
   todoList: [],
+  statistics: {
+    totalTasks: 0,
+    updatedTasks: 0,
+    deletedTasks: 0,
+  },
   status: 'idle',
   error: null,
 };
@@ -77,6 +85,8 @@ export const todoSlice = createSlice({
       })
       .addCase(deleteAll.fulfilled, (state, action) => {
         state.todoList = state.todoList.filter(todo => !action.payload.includes(todo.id));
+      }).addCase(getStatistics.fulfilled, (state, action) => {
+        state.statistics = action.payload;
       });
 
   },
